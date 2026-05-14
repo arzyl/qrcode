@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   function handleTextareaChange(event: ChangeEvent<HTMLTextAreaElement>): void {
-    throw new Error("Function not implemented.");
+    setText(event.target.value);
   }
 
   return (
