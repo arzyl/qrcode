@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
   const [qrImage, setQrImage] = useState("");
   const [text, setText] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
   async function generateQR() {
@@ -16,6 +16,10 @@ export default function Home() {
     const res = await fetch(`/api/qr?text=${encodeURIComponent(inputText)}`);
     const blob = await res.blob();
     setQrImage(URL.createObjectURL(blob));
+  }
+
+  function handleTextareaChange(event: ChangeEvent<HTMLTextAreaElement>): void {
+    throw new Error("Function not implemented.");
   }
 
   return (
@@ -29,12 +33,11 @@ export default function Home() {
 
        <textarea className="w-full p-3 border rounded-lg"
         value={inputText}
-        onChange={handleChange}
+        onChange={handleTextareaChange}
         rows={5}
         cols={40}
         placeholder="Type here..."
         style={{ display: "block", marginBottom: "10px" }} 
-	onChange={(e) => setInputText(e.target.value)}
       />
 
       <button
